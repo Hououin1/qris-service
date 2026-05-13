@@ -1,0 +1,25 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const appController_1 = require("../controllers/appController");
+const orderController_1 = require("../controllers/orderController");
+const authRoutes_1 = __importDefault(require("./authRoutes"));
+const orderRoutes_1 = __importDefault(require("./orderRoutes"));
+const paymentCheckerRoutes_1 = __importDefault(require("./paymentCheckerRoutes"));
+const paymentRoutes_1 = __importDefault(require("./paymentRoutes"));
+const routes_1 = __importDefault(require("../modules/qris/routes"));
+const router = (0, express_1.Router)();
+router.get("/", appController_1.getHome);
+router.get("/health", appController_1.getHealth);
+router.get("/debug/env", appController_1.getDebugEnv);
+router.get("/debug/storage", appController_1.getDebugStorage);
+router.use("/auth", authRoutes_1.default);
+router.use("/payment", paymentRoutes_1.default);
+router.use("/order", orderRoutes_1.default);
+router.use("/checker", paymentCheckerRoutes_1.default);
+router.get("/orders", orderController_1.getOrdersHandler);
+router.use("/qris", routes_1.default);
+exports.default = router;

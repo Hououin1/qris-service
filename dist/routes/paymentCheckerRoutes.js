@@ -1,0 +1,10 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const paymentCheckerController_1 = require("../controllers/paymentCheckerController");
+const paymentCheckerRouter = (0, express_1.Router)();
+paymentCheckerRouter.post("/run-once", paymentCheckerController_1.runPaymentCheckerOnceHandler);
+paymentCheckerRouter.post("/start", paymentCheckerController_1.startPaymentCheckerHandler);
+paymentCheckerRouter.post("/stop", paymentCheckerController_1.stopPaymentCheckerHandler);
+paymentCheckerRouter.get("/status", paymentCheckerController_1.getPaymentCheckerStatusHandler);
+exports.default = paymentCheckerRouter;
